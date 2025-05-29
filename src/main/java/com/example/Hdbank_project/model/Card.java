@@ -2,6 +2,7 @@ package com.example.Hdbank_project.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,10 +23,7 @@ public class Card {
     @Column(name = "id")
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    @NotBlank(message = "Không đước để trống")
-    private CardType cardType;
+
 
     @Column(nullable = false)
     @NotBlank(message = "Không đước để trống")
@@ -35,8 +33,13 @@ public class Card {
     @NotBlank(message = "Không đước để trống")
     private String idNumber;
 
+    @NotNull(message = "Không được để trống")
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    @NotBlank(message = "Không đước để trống")
+    private CardType cardType;
+
+    @NotNull(message = "Không được để trống")
+    @Column(nullable = false)
     private LocalDate issuedDate;
 
     private String notes;
