@@ -2,15 +2,12 @@ package com.example.Hdbank_project.controller;
 
 import com.example.Hdbank_project.config.JwtUtils;
 import com.example.Hdbank_project.dto.CreateCardRequest;
-import com.example.Hdbank_project.dto.LoginRequest;
-import com.example.Hdbank_project.dto.LoginResponse;
 import com.example.Hdbank_project.dto.RejectReasonDTO;
 import com.example.Hdbank_project.model.Card;
 import com.example.Hdbank_project.service.CardService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.*;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -23,19 +20,17 @@ import java.util.Optional;
 public class CardController {
 
     private final AuthenticationManager authenticationManager;
-
     private final CardService cardService;
 
     public CardController(AuthenticationManager authenticationManager, JwtUtils jwtUtils, CardService cardService) {
         this.authenticationManager = authenticationManager;
-
         this.cardService = cardService;
     }
+
     // 2. Tạo yêu cầu phát hành thẻ - ROLE_USER
     @PostMapping("/request")
     public ResponseEntity<?> createRequest(@Valid @RequestBody CreateCardRequest request) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
         Card card = Card.builder()
                 .cardType(request.getCardType())
                 .fullName(request.getFullName())
@@ -43,11 +38,9 @@ public class CardController {
                 .issuedDate(request.getIssuedDate())
                 .notes(request.getNotes())
                 .build();
-
         Card created = cardService.createRequest(card, userDetails.getUsername());
         return ResponseEntity.ok(created);
     }
-
 
     // 3. Lấy danh sách yêu cầu của user - ROLE_USER
     @GetMapping("/my-requests")
@@ -81,6 +74,4 @@ public class CardController {
                 .map(card -> ResponseEntity.ok(card))
                 .orElse(ResponseEntity.badRequest().build());
     }
-
-
 }

@@ -54,7 +54,6 @@ public class CardService {
         }
         return Optional.empty();
     }
-
     // Từ chối yêu cầu
     public Optional<Card> rejectRequest(Long id, String reason, String approver) {
         Optional<Card> optional = cardRepository.findById(id);
@@ -71,5 +70,4 @@ public class CardService {
         }
         return Optional.empty();
     }
-
 }

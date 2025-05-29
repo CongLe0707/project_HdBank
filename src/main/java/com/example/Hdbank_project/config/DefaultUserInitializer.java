@@ -7,7 +7,6 @@ import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,7 +27,6 @@ public class DefaultUserInitializer {
                     .roles(new HashSet<>(Set.of(Role.ROLE_APPROVER)))
                     .build();
             userRepository.save(approver);
-            System.out.println("✅ Approver account created: username=approver, password=Test@123");
         }
     }
 }
