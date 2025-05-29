@@ -14,11 +14,9 @@ import java.util.Optional;
 public class CardService {
 
     private final CardRepository cardRepository;
-    private final UserRepository userRepository;
 
     public CardService(CardRepository cardRepository, UserRepository userRepository) {
         this.cardRepository = cardRepository;
-        this.userRepository = userRepository;
     }
 
     // Tạo yêu cầu phát hành thẻ

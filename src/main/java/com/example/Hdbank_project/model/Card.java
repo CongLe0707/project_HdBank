@@ -1,6 +1,7 @@
 package com.example.Hdbank_project.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,15 +24,19 @@ public class Card {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    @NotBlank(message = "Không đước để trống")
     private CardType cardType;
 
     @Column(nullable = false)
+    @NotBlank(message = "Không đước để trống")
     private String fullName;
 
     @Column(nullable = false, length = 12)
+    @NotBlank(message = "Không đước để trống")
     private String idNumber;
 
     @Column(nullable = false)
+    @NotBlank(message = "Không đước để trống")
     private LocalDate issuedDate;
 
     private String notes;
@@ -50,10 +55,4 @@ public class Card {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @PrePersist
-    public void prePersist() {
-        if (status == null) {
-            status = RequestStatus.PENDING;
-        }
-    }
 }

@@ -1,6 +1,7 @@
 package com.example.Hdbank_project.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,8 +23,9 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
+    @NotBlank(message = "Không đước để trống")
     private String username;
+    @NotBlank(message = "Không đước để trống")
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
