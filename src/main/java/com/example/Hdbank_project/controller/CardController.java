@@ -7,23 +7,18 @@ import com.example.Hdbank_project.model.Card;
 import com.example.Hdbank_project.service.CardService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/cards")
 public class CardController {
 
-    private final AuthenticationManager authenticationManager;
     private final CardService cardService;
 
-    public CardController(AuthenticationManager authenticationManager, JwtUtils jwtUtils, CardService cardService) {
-        this.authenticationManager = authenticationManager;
+    public CardController(JwtUtils jwtUtils, CardService cardService) {
         this.cardService = cardService;
     }
 

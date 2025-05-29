@@ -23,8 +23,6 @@ public class Card {
     @Column(name = "id")
     private Long id;
 
-
-
     @Column(nullable = false)
     @NotBlank(message = "Không đước để trống")
     private String fullName;

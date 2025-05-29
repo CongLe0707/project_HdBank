@@ -23,9 +23,9 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Không đước để trống")
+    @NotBlank(message = "Không được để trống")
     private String username;
-    @NotBlank(message = "Không đước để trống")
+    @NotBlank(message = "Không được để trống")
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
