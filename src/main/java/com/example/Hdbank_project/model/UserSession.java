@@ -25,7 +25,7 @@ public class UserSession {
 
     private LocalDateTime loginTime;
 
-    private LocalDateTime logoutTime;  // có thể null nếu chưa logout
+    private LocalDateTime logoutTime;
 
     public long getSessionDurationSeconds() {
         if (logoutTime == null) {

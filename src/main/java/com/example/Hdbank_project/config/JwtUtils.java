@@ -25,6 +25,15 @@ public class JwtUtils {
                 .signWith(jwtSecret, SignatureAlgorithm.HS512)
                 .compact();
     }
+    public String generateRefreshToken(UserDetails userDetails) {
+        return Jwts.builder()
+                .setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 1000L * 60 * 60 * 24 * 7)) // 7 ngày
+                .signWith(jwtSecret, SignatureAlgorithm.HS512)
+                .compact();
+    }
+
 
     public String getUsernameFromJwtToken(String token) {
         return Jwts.parserBuilder()

@@ -1,15 +1,22 @@
 package com.example.Hdbank_project.dto;
 
 public class JwtResponse {
-    private String token;
+    private String accessToken;
+    private String refreshToken;
     private String type = "Bearer";
 
-    public JwtResponse(String token) {
-        this.token = token;
+    public JwtResponse(String accessToken, String refreshToken) {
+        this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
     }
 
-    public String getToken() {
-        return token;
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
     }
 
     public String getType() {
