@@ -1,7 +1,9 @@
 package com.example.Hdbank_project.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,10 +26,13 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Không được để trống")
-    private String username;
 
-    @NotBlank(message = "Không được để trống")
+    private String email;
+
+
+    private String phoneNumber;
+
+
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -46,7 +51,9 @@ public class User implements UserDetails {
     public String getPassword() { return password; }
 
     @Override
-    public String getUsername() { return username; }
+    public String getUsername() {
+        return email;
+    }
 
     @Override
     public boolean isAccountNonExpired() { return true; }

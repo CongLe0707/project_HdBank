@@ -19,14 +19,16 @@ public class DefaultUserInitializer {
 
     @PostConstruct
     public void initApproverUser() {
-        String approverUsername = "cong123";
-        if (!userRepository.existsByUsername(approverUsername)) {
+        String approverEmail = "cong123@hdbank.vn";
+        if (!userRepository.existsByEmail(approverEmail)) {
             User approver = User.builder()
-                    .username(approverUsername)
-                    .password(passwordEncoder.encode("1234"))
-                    .roles(new HashSet<>(Set.of(Role.ROLE_APPROVER)))
+                    .email(approverEmail)
+                    .phoneNumber("0901234567")
+                    .password(passwordEncoder.encode("Cong123@"))
+                    .roles(Set.of(Role.ROLE_APPROVER))
                     .build();
             userRepository.save(approver);
         }
     }
+
 }

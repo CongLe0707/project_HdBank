@@ -1,6 +1,7 @@
 package com.example.Hdbank_project.service;
 
 import com.example.Hdbank_project.model.Card;
+import com.example.Hdbank_project.model.CardType;
 import com.example.Hdbank_project.model.RequestStatus;
 import com.example.Hdbank_project.repository.CardRepository;
 import com.example.Hdbank_project.repository.UserRepository;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Service
@@ -31,6 +31,21 @@ public class CardService {
         return cardRepository.save(card);
     }
 
+    public boolean userHasApprovedCardOfType(String username, CardType cardType) {
+        return cardRepository.existsByRequestedByAndCardTypeAndStatus(username, cardType, RequestStatus.APPROVED);
+    }
+
+
+    public boolean hasActiveRequest(String username, CardType cardType) {
+        // Chỉ coi PENDING và APPROVED là active, REJECTED không tính
+        List<RequestStatus> activeStatuses = List.of(RequestStatus.PENDING, RequestStatus.APPROVED);
+        return cardRepository.existsByRequestedByAndCardTypeAndStatusIn(username, cardType, activeStatuses);
+    }
+
+
+
+
+
     // Lấy các yêu cầu đã gửi của người dùng
     public List<Card> getMyRequests(String username) {
         return cardRepository.findByRequestedBy(username);
@@ -49,7 +64,7 @@ public class CardService {
             if (card.getUser() != null) {
                 boolean exists = cardRepository.existsByUserAndCardTypeAndIdNot(card.getUser(), card.getCardType(), card.getId());
                 if (exists) {
-                    return Optional.empty(); // User đã có thẻ cùng loại rồi
+                    return Optional.empty();
                 }
             }
             card.setStatus(RequestStatus.APPROVED);
@@ -98,13 +113,18 @@ public class CardService {
     }
 
     public Optional<Card> searchCard(String numberCard, String idNumber) {
-        Optional<Card> cardOpt = Optional.empty();
         if (numberCard != null && !numberCard.isEmpty()) {
-            cardOpt = cardRepository.findByNumberCard(numberCard);
+            return cardRepository.findByNumberCard(numberCard);
         }
-        if (!cardOpt.isPresent() && idNumber != null && !idNumber.isEmpty()) {
-            cardOpt = cardRepository.findByIdNumber(idNumber);
+        if (idNumber != null && !idNumber.isEmpty()) {
+            List<Card> cards = cardRepository.findByIdNumber(idNumber);
+            if (!cards.isEmpty()) {
+                // Ví dụ trả về thẻ mới nhất
+                Card latestCard = cards.get(0);
+                return Optional.of(latestCard);
+            }
         }
-        return cardOpt;
+        return Optional.empty();
     }
+
 }

@@ -1,29 +1,39 @@
-    package com.example.Hdbank_project.dto;
+package com.example.Hdbank_project.dto;
 
-    import com.example.Hdbank_project.model.CardType;
+import com.example.Hdbank_project.model.CardType;
+import jakarta.validation.constraints.*;
+import lombok.Data;
 
-    import jakarta.validation.constraints.NotBlank;
-    import lombok.Data;
-    import org.antlr.v4.runtime.misc.NotNull;
+import java.time.LocalDate;
 
-    import java.time.LocalDate;
+@Data
+public class CreateCardRequest {
 
-    @Data
-    public class CreateCardRequest {
+    @NotBlank(message = "Họ tên không được để trống")
+    private String fullName;
 
-        @NotNull
-        private CardType cardType;
+    @NotBlank(message = "CMND/CCCD không được để trống")
+    @Size(min = 9, max = 12, message = "CMND/CCCD phải từ 9 đến 12 ký tự")
+    private String idNumber;
 
-        @NotBlank
-        private String fullName;
+    @NotNull(message = "Loại thẻ không được để trống")
+    private CardType cardType;
 
-        @NotBlank
-        private String idNumber;
+    @NotNull(message = "Ngày cấp không được để trống")
+    private LocalDate issuedDate;
 
-        @NotNull
-        private LocalDate issuedDate;
+    @NotBlank(message = "Số điện thoại không được để trống")
+    @Pattern(regexp = "^(0[0-9]{9})$", message = "Số điện thoại không hợp lệ")
+    private String phoneNumber;
 
+    @NotBlank(message = "Phường/Xã không được để trống")
+    private String ward;
 
-        private String notes;
+    @NotBlank(message = "Quận/Huyện không được để trống")
+    private String district;
 
-    }
+    @NotBlank(message = "Tỉnh/Thành phố không được để trống")
+    private String province;
+
+    private String notes;
+}

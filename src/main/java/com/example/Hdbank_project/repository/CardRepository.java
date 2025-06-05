@@ -23,8 +23,12 @@ public interface CardRepository extends JpaRepository<Card, Long> {
     boolean existsByNumberCard(String numberCard);
 
 
+    List<Card> findByIdNumber(String idNumber);
     Optional<Card> findByNumberCard(String numberCard);
 
-    // Tìm thẻ theo số CMND/CCCD (idNumber)
-    Optional<Card> findByIdNumber(String idNumber);
+    boolean existsByRequestedByAndCardTypeAndStatus(String requestedBy, CardType cardType, RequestStatus status);
+
+
+    boolean existsByRequestedByAndCardTypeAndStatusIn(String requestedBy, CardType cardType, List<RequestStatus> statuses);
+
 }

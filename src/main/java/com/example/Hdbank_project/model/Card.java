@@ -44,6 +44,24 @@ public class Card {
     @Column(nullable = false)
     private LocalDate issuedDate;
 
+    @Column(nullable = false, length = 10)
+    @NotBlank(message = "Không đước để trống")
+    private String phoneNumber;
+
+
+    @Column(length = 100)
+    @NotBlank(message = "Phường/Xã không được để trống")
+    private String ward;
+
+    @Column(length = 100)
+    @NotBlank(message = "Quận/Huyện không được để trống")
+    private String district;
+
+    @Column(length = 100)
+    @NotBlank(message = "Tỉnh/Thành phố không được để trống")
+    private String province;
+
+
     private String notes;
 
     @Enumerated(EnumType.STRING)

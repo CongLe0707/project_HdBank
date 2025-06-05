@@ -10,9 +10,11 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/cards")
@@ -25,21 +27,43 @@ public class CardController {
     }
     // 2. Tạo yêu cầu phát hành thẻ - ROLE_USER
     @PostMapping("/request")
-    public ResponseEntity<?> createRequest(@Valid @RequestBody CreateCardRequest request) {
+    public ResponseEntity<?> createRequest(@Valid @RequestBody CreateCardRequest request, BindingResult result) {
+        if (result.hasErrors()) {
+            String errorMessage = result.getFieldErrors().stream()
+                    .map(err -> err.getDefaultMessage())
+                    .collect(Collectors.joining("; "));
+            return ResponseEntity.badRequest().body(Map.of("message", errorMessage));
+        }
+
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = userDetails.getUsername();
+
+        if (cardService.hasActiveRequest(username, request.getCardType())) {
+            return ResponseEntity.badRequest().body(Map.of("message",
+                    "Bạn đã có yêu cầu phát hành thẻ loại " + request.getCardType() + " đang chờ duyệt hoặc đã được duyệt. Vui lòng chờ hoặc hủy yêu cầu trước khi tạo mới."));
+        }
+
         Card card = Card.builder()
                 .cardType(request.getCardType())
                 .fullName(request.getFullName())
                 .idNumber(request.getIdNumber())
                 .issuedDate(request.getIssuedDate())
+                .phoneNumber(request.getPhoneNumber())
+                .ward(request.getWard())
+                .district(request.getDistrict())
+                .province(request.getProvince())
                 .notes(request.getNotes())
                 .build();
-        Card created = cardService.createRequest(card, userDetails.getUsername());
+
+        Card created = cardService.createRequest(card, username);
+
         return ResponseEntity.ok(Map.of(
                 "message", "Tạo yêu cầu phát hành thẻ thành công",
                 "data", created
         ));
     }
+
+
     // 3. Lấy danh sách yêu cầu của user - ROLE_USER
     @GetMapping("/my-requests")
     public ResponseEntity<?> getMyRequests() {
