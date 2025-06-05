@@ -36,7 +36,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/cards/request", "/api/cards/my-requests").hasAuthority("ROLE_USER")
-                        .requestMatchers("/api/cards/pending", "/api/cards/approve/**", "/api/cards/reject/**", "/api/approver/**").hasAuthority("ROLE_APPROVER")
+                        .requestMatchers("/api/cards/pending", "/api/cards/approve/**", "/api/cards/reject/**", "/api/approver/**,/api/cards/search").hasAuthority("ROLE_APPROVER")
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())

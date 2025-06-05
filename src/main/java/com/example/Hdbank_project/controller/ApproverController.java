@@ -3,14 +3,9 @@ package com.example.Hdbank_project.controller;
 import com.example.Hdbank_project.model.UserSession;
 import com.example.Hdbank_project.repository.UserSessionRepository;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -30,20 +25,23 @@ public class ApproverController {
         } else {
             sessions = userSessionRepository.findByUsername(username);
         }
-        return ResponseEntity.ok(sessions);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Lấy danh sách phiên làm việc thành công");
+        response.put("data", sessions);
+        return ResponseEntity.ok(response);
     }
+
     @GetMapping("/active-users")
     public ResponseEntity<?> getActiveUsers() {
         List<UserSession> activeSessions = userSessionRepository.findByLogoutTimeIsNull();
-
-        // Lấy danh sách username duy nhất
         Set<String> onlineUsers = activeSessions.stream()
                 .map(UserSession::getUsername)
                 .collect(Collectors.toSet());
-
-        return ResponseEntity.ok(Map.of(
-                "Số lượng user đang online", onlineUsers.size(),
-                "Danh sách các user đang online", onlineUsers
-        ));
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Lấy danh sách người dùng đang online thành công");
+        response.put("total", onlineUsers.size());
+        response.put("data", onlineUsers);
+        return ResponseEntity.ok(response);
     }
 }

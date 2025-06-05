@@ -26,6 +26,7 @@ public class User implements UserDetails {
 
     @NotBlank(message = "Không được để trống")
     private String username;
+
     @NotBlank(message = "Không được để trống")
     private String password;
 

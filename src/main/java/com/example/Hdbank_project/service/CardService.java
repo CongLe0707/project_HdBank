@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 public class CardService {
@@ -44,14 +46,40 @@ public class CardService {
         Optional<Card> cardOpt = cardRepository.findById(id);
         if (cardOpt.isPresent()) {
             Card card = cardOpt.get();
+            if (card.getUser() != null) {
+                boolean exists = cardRepository.existsByUserAndCardTypeAndIdNot(card.getUser(), card.getCardType(), card.getId());
+                if (exists) {
+                    return Optional.empty(); // User đã có thẻ cùng loại rồi
+                }
+            }
             card.setStatus(RequestStatus.APPROVED);
             card.setApprovedBy(approverUsername);
             card.setApprovalTime(LocalDateTime.now());
+            String uniqueCardNumber = generateUnique18DigitCardNumber();
+            card.setNumberCard(uniqueCardNumber);
             Card savedCard = cardRepository.save(card);
             return Optional.of(savedCard);
         }
         return Optional.empty();
     }
+
+    private String generateUnique18DigitCardNumber() {
+        String cardNumber;
+        do {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 18; i++) {
+                int digit = ThreadLocalRandom.current().nextInt(0, 10);
+                // Đảm bảo số đầu tiên không phải 0
+                if (i == 0 && digit == 0) {
+                    digit = ThreadLocalRandom.current().nextInt(1, 10);
+                }
+                sb.append(digit);
+            }
+            cardNumber = sb.toString();
+        } while (cardRepository.existsByNumberCard(cardNumber));
+        return cardNumber;
+    }
+
     // Từ chối yêu cầu
     public Optional<Card> rejectRequest(Long id, String reason, String approver) {
         Optional<Card> optional = cardRepository.findById(id);
@@ -67,5 +95,16 @@ public class CardService {
             }
         }
         return Optional.empty();
+    }
+
+    public Optional<Card> searchCard(String numberCard, String idNumber) {
+        Optional<Card> cardOpt = Optional.empty();
+        if (numberCard != null && !numberCard.isEmpty()) {
+            cardOpt = cardRepository.findByNumberCard(numberCard);
+        }
+        if (!cardOpt.isPresent() && idNumber != null && !idNumber.isEmpty()) {
+            cardOpt = cardRepository.findByIdNumber(idNumber);
+        }
+        return cardOpt;
     }
 }

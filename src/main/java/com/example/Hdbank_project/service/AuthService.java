@@ -22,12 +22,12 @@ public class AuthService {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
+
     @Transactional
     public User register(RegisterRequest request) throws Exception {
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new Exception("Username is already taken");
         }
-
         User user = User.builder()
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))

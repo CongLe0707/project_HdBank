@@ -18,8 +18,12 @@ import java.time.LocalDateTime;
 @Table(name = "RefreshToken")
 public class RefreshToken {
     @Id
+
     private String token;
+
     private  String username;
+
     private LocalDateTime expiryDate;
+
     private boolean revoked;
 }

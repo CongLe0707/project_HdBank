@@ -3,6 +3,7 @@ package com.example.Hdbank_project.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,6 +32,9 @@ public class Card {
     @NotBlank(message = "Không đước để trống")
     private String idNumber;
 
+    @Column(nullable = true, length = 18, unique = true)
+    private String numberCard;
+
     @NotNull(message = "Không được để trống")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -47,9 +51,13 @@ public class Card {
     private RequestStatus status;
 
     private String approverUsername;
+
     private String requestedBy;
+
     private String approvedBy;
+
     private LocalDateTime approvalTime;
+
     private String rejectReason;
 
     @ManyToOne(fetch = FetchType.LAZY)
