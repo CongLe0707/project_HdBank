@@ -1,6 +1,6 @@
 package com.example.Hdbank_project.service;
 
-import com.example.Hdbank_project.model.User;
+import com.example.Hdbank_project.model.Entity.User;
 import com.example.Hdbank_project.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

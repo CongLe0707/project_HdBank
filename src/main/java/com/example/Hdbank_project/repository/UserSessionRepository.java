@@ -1,6 +1,6 @@
 package com.example.Hdbank_project.repository;
 
-import com.example.Hdbank_project.model.UserSession;
+import com.example.Hdbank_project.model.Entity.UserSession;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

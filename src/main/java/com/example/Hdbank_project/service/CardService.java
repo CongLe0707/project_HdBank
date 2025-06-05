@@ -1,8 +1,8 @@
 package com.example.Hdbank_project.service;
 
-import com.example.Hdbank_project.model.Card;
-import com.example.Hdbank_project.model.CardType;
-import com.example.Hdbank_project.model.RequestStatus;
+import com.example.Hdbank_project.model.Entity.Card;
+import com.example.Hdbank_project.model.Enum.CardType;
+import com.example.Hdbank_project.model.Enum.RequestStatus;
 import com.example.Hdbank_project.repository.CardRepository;
 import com.example.Hdbank_project.repository.UserRepository;
 import org.springframework.stereotype.Service;

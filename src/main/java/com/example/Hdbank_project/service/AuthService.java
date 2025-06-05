@@ -1,14 +1,13 @@
     package com.example.Hdbank_project.service;
 
-    import com.example.Hdbank_project.dto.RegisterRequest;
-    import com.example.Hdbank_project.model.Role;
-    import com.example.Hdbank_project.model.User;
+    import com.example.Hdbank_project.dto.request.RegisterRequest;
+    import com.example.Hdbank_project.model.Enum.Role;
+    import com.example.Hdbank_project.model.Entity.User;
     import com.example.Hdbank_project.repository.UserRepository;
     import jakarta.transaction.Transactional;
     import org.springframework.security.crypto.password.PasswordEncoder;
     import org.springframework.stereotype.Service;
 
-    import java.util.HashSet;
     import java.util.Set;
 
     @Service

@@ -1,4 +1,4 @@
-package com.example.Hdbank_project.dto;
+package com.example.Hdbank_project.dto.response;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

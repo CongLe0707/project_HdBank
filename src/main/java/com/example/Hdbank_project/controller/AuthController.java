@@ -1,15 +1,14 @@
 package com.example.Hdbank_project.controller;
 
 import com.example.Hdbank_project.config.JwtUtils;
-import com.example.Hdbank_project.dto.JwtResponse;
-import com.example.Hdbank_project.dto.LoginRequest;
-import com.example.Hdbank_project.dto.RegisterRequest;
-import com.example.Hdbank_project.model.User;
-import com.example.Hdbank_project.model.UserSession;
+import com.example.Hdbank_project.dto.response.JwtResponse;
+import com.example.Hdbank_project.dto.request.LoginRequest;
+import com.example.Hdbank_project.dto.request.RegisterRequest;
+import com.example.Hdbank_project.model.Entity.User;
+import com.example.Hdbank_project.model.Entity.UserSession;
 import com.example.Hdbank_project.repository.UserSessionRepository;
 import com.example.Hdbank_project.service.AuthService;
 import jakarta.validation.Valid;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

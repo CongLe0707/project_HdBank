@@ -1,9 +1,10 @@
-package com.example.Hdbank_project.model;
+package com.example.Hdbank_project.model.Entity;
 
+import com.example.Hdbank_project.model.Enum.CardType;
+import com.example.Hdbank_project.model.Enum.RequestStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

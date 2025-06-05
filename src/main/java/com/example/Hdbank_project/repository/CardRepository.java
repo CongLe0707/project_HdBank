@@ -1,12 +1,11 @@
 package com.example.Hdbank_project.repository;
 
 
-import com.example.Hdbank_project.model.Card;
-import com.example.Hdbank_project.model.CardType;
-import com.example.Hdbank_project.model.RequestStatus;
-import com.example.Hdbank_project.model.User;
+import com.example.Hdbank_project.model.Entity.Card;
+import com.example.Hdbank_project.model.Enum.CardType;
+import com.example.Hdbank_project.model.Enum.RequestStatus;
+import com.example.Hdbank_project.model.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

@@ -1,10 +1,10 @@
 package com.example.Hdbank_project.controller;
 
 import com.example.Hdbank_project.config.JwtUtils;
-import com.example.Hdbank_project.dto.CardSearchRequest;
-import com.example.Hdbank_project.dto.CreateCardRequest;
-import com.example.Hdbank_project.dto.RejectReasonDTO;
-import com.example.Hdbank_project.model.Card;
+import com.example.Hdbank_project.dto.request.CardSearchRequest;
+import com.example.Hdbank_project.dto.request.CreateCardRequest;
+import com.example.Hdbank_project.dto.response.RejectReasonDTO;
+import com.example.Hdbank_project.model.Entity.Card;
 import com.example.Hdbank_project.service.CardService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.example.Hdbank_project.model;
+package com.example.Hdbank_project.model.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

@@ -1,6 +1,6 @@
-package com.example.Hdbank_project.dto;
+package com.example.Hdbank_project.dto.request;
 
-import com.example.Hdbank_project.model.CardType;
+import com.example.Hdbank_project.model.Enum.CardType;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 

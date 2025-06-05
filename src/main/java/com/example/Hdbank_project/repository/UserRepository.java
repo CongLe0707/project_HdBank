@@ -2,7 +2,7 @@ package com.example.Hdbank_project.repository;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.example.Hdbank_project.model.User; // ✅ Your entity class
+import com.example.Hdbank_project.model.Entity.User; // ✅ Your entity class
 
 
 import java.util.Optional;

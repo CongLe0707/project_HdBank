@@ -1,6 +1,6 @@
 package com.example.Hdbank_project.repository;
 
-import com.example.Hdbank_project.model.RefreshToken;
+import com.example.Hdbank_project.model.Entity.RefreshToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

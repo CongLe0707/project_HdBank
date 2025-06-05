@@ -1,6 +1,6 @@
 package com.example.Hdbank_project.controller;
 
-import com.example.Hdbank_project.model.UserSession;
+import com.example.Hdbank_project.model.Entity.UserSession;
 import com.example.Hdbank_project.repository.UserSessionRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.example.Hdbank_project.dto;
+package com.example.Hdbank_project.dto.response;
 
 public class JwtResponse {
     private String accessToken;

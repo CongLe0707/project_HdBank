@@ -1,15 +1,12 @@
-package com.example.Hdbank_project.model;
+package com.example.Hdbank_project.model.Entity;
 
+import com.example.Hdbank_project.model.Enum.Role;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
