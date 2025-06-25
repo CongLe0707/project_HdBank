@@ -1,9 +1,8 @@
 spring:
   application:
     name: Hdbank_project
-
   datasource:
-    url: jdbc:postgresql://db:5432/hdbankdb
+    url: jdbc:postgresql://localhost:5432/hdbankdb
     username: postgres
     password: 12345
     driver-class-name: org.postgresql.Driver
@@ -13,21 +12,8 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-
-  kafka:
-    bootstrap-servers: kafka:9092  # CHỈNH: dùng tên service Kafka
-    consumer:
-      group-id: user-activity-consumer
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-
 server:
-  port: 8081
-
+  port: 8888
 logging:
   level:
     org.springframework.web: DEBUG
