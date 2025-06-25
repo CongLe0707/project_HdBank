@@ -24,13 +24,13 @@ public  class JwtAuthFilter extends OncePerRequestFilter {
         this.jwtUtils = jwtUtils;
         this.userDetailsService = uds;
     }
-
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
+        // Lay thong tin log
         String header = request.getHeader("Authorization");
         String jwt = null;
         String username = null;
@@ -53,6 +53,7 @@ public  class JwtAuthFilter extends OncePerRequestFilter {
             authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(authToken);
         }
+
         filterChain.doFilter(request, response);
     }
 }

@@ -26,7 +26,7 @@ public class Card {
     private Long id;
 
     @Column(nullable = false)
-    @NotBlank(message = "Không đước để trống")
+    @NotBlank(message = "Không đước để trống nhe")
     private String fullName;
 
     @Column(nullable = false, length = 12)
