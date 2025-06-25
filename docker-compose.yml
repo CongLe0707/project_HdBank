@@ -1,15 +1,15 @@
 version: '3.8'
 
 services:
-  app:
-    build: .
+  jenkins:
+    image: jenkins/jenkins:lts
     ports:
       - "8080:8080"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/hdbankdb
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: 12345
-
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    networks:
+      - hdbank-net
     depends_on:
       - db
 
@@ -23,6 +23,12 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - hdbank-net
 
 volumes:
   pgdata:
+  jenkins_home:
+
+networks:
+  hdbank-net:
