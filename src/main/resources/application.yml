@@ -3,7 +3,7 @@ spring:
     name: Hdbank_project
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/hdbankdb
+    url: jdbc:postgresql://db:5432/hdbankdb  # CHỈNH: dùng tên service DB
     username: postgres
     password: 12345
     driver-class-name: org.postgresql.Driver
@@ -15,7 +15,7 @@ spring:
     show-sql: true
 
   kafka:
-    bootstrap-servers: localhost:9093
+    bootstrap-servers: kafka:9092  # CHỈNH: dùng tên service Kafka
     consumer:
       group-id: user-activity-consumer
       auto-offset-reset: earliest
@@ -32,4 +32,3 @@ logging:
   level:
     org.springframework.web: DEBUG
     org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter: DEBUG
-
