@@ -3,7 +3,7 @@ spring:
     name: Hdbank_project
 
   datasource:
-    url: jdbc:postgresql://db:5432/hdbankdb  # CHỈNH: dùng tên service DB
+    url: jdbc:postgresql://localhost:5432/hdbankdb
     username: postgres
     password: 12345
     driver-class-name: org.postgresql.Driver
